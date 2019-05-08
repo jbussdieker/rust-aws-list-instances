@@ -15,8 +15,8 @@ fn handle_reservations(reservation_list: std::vec::Vec<rusoto_ec2::Reservation>)
     }
 }
 
-fn handle_output(output: rusoto_ec2::DescribeInstancesResult) {
-    match output.reservations {
+fn handle_result(result: rusoto_ec2::DescribeInstancesResult) {
+    match result.reservations {
         Some(reservation_list) => {
             handle_reservations(reservation_list)
         },
@@ -29,8 +29,8 @@ fn main() {
     let describe_instances_request: rusoto_ec2::DescribeInstancesRequest = Default::default();
 
     match rusoto_ec2::Ec2::describe_instances(&client, describe_instances_request).sync() {
-        Ok(output) => {
-            handle_output(output)
+        Ok(result) => {
+            handle_result(result)
         },
         Err(error) => {
             println!("Error: {:?}", error);

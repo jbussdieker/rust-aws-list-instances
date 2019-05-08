@@ -6,3 +6,4 @@ edition = "2018"
 
 [dependencies]
 rusoto_core = "0.38.0"
+rusoto_ec2 = "0.38.0"
